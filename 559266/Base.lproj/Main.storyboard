@@ -62,26 +62,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d7W-F0-0q3">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="272"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="346"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="d7W-F0-0q3" secondAttribute="height" multiplier="375:272" id="jXs-1p-shP"/>
+                                    <constraint firstAttribute="width" secondItem="d7W-F0-0q3" secondAttribute="height" multiplier="375:232" constant="-184.26724137931035" id="9zY-M6-NWD"/>
+                                    <constraint firstAttribute="height" constant="346" id="qCw-fb-G3J"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OG6-Tm-CFx">
-                                <rect key="frame" x="16" y="351" width="343" height="241"/>
+                                <rect key="frame" x="16" y="419" width="343" height="228"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="OG6-Tm-CFx" secondAttribute="height" multiplier="343:241" id="d1n-0s-a1r"/>
-                                </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJV-q3-N9M">
-                                <rect key="frame" x="16" y="298" width="42" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="PJV-q3-N9M" secondAttribute="height" multiplier="2:1" id="j40-bA-g71"/>
-                                </constraints>
+                                <rect key="frame" x="16" y="390" width="343" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -89,14 +84,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="d7W-F0-0q3" firstAttribute="leading" secondItem="QFh-5B-HwY" secondAttribute="leading" id="7e2-Vh-GUn"/>
-                            <constraint firstAttribute="trailing" secondItem="d7W-F0-0q3" secondAttribute="trailing" id="8CJ-to-JVL"/>
-                            <constraint firstItem="PJV-q3-N9M" firstAttribute="leading" secondItem="OG6-Tm-CFx" secondAttribute="leading" id="8Qh-rS-3gl"/>
-                            <constraint firstItem="d7W-F0-0q3" firstAttribute="top" secondItem="QFh-5B-HwY" secondAttribute="top" id="ItR-ZF-0aL"/>
-                            <constraint firstItem="PJV-q3-N9M" firstAttribute="top" secondItem="d7W-F0-0q3" secondAttribute="bottom" constant="26" id="RZ9-KZ-sws"/>
-                            <constraint firstItem="OG6-Tm-CFx" firstAttribute="centerX" secondItem="d7W-F0-0q3" secondAttribute="centerX" id="Sum-02-Mi5"/>
-                            <constraint firstItem="OG6-Tm-CFx" firstAttribute="top" secondItem="d7W-F0-0q3" secondAttribute="bottom" constant="79" id="fQS-0N-kud"/>
-                            <constraint firstItem="OG6-Tm-CFx" firstAttribute="leading" secondItem="QFh-5B-HwY" secondAttribute="leadingMargin" id="yia-ve-3Ad"/>
+                            <constraint firstItem="OG6-Tm-CFx" firstAttribute="top" secondItem="PJV-q3-N9M" secondAttribute="bottom" constant="8" id="BBX-Us-Sz7"/>
+                            <constraint firstItem="d7W-F0-0q3" firstAttribute="leading" secondItem="QFh-5B-HwY" secondAttribute="leading" id="FXu-fo-SR3"/>
+                            <constraint firstItem="PJV-q3-N9M" firstAttribute="leading" secondItem="OG6-Tm-CFx" secondAttribute="leading" id="MdI-5v-wpA"/>
+                            <constraint firstItem="PJV-q3-N9M" firstAttribute="leading" secondItem="QFh-5B-HwY" secondAttribute="leadingMargin" id="NBm-Tr-HRv"/>
+                            <constraint firstItem="d7W-F0-0q3" firstAttribute="centerX" secondItem="PJV-q3-N9M" secondAttribute="centerX" id="Ttg-l1-6ID"/>
+                            <constraint firstAttribute="trailing" secondItem="d7W-F0-0q3" secondAttribute="trailing" id="hqe-KE-tu2"/>
+                            <constraint firstItem="d7W-F0-0q3" firstAttribute="top" secondItem="zMg-Nf-KJK" secondAttribute="bottom" id="hth-i5-4if"/>
+                            <constraint firstItem="0mN-qJ-Kbt" firstAttribute="top" secondItem="OG6-Tm-CFx" secondAttribute="bottom" constant="20" id="ohV-0X-Dja"/>
+                            <constraint firstItem="PJV-q3-N9M" firstAttribute="trailing" secondItem="OG6-Tm-CFx" secondAttribute="trailing" id="qgM-8g-Myc"/>
+                            <constraint firstItem="PJV-q3-N9M" firstAttribute="top" secondItem="d7W-F0-0q3" secondAttribute="bottom" constant="24" id="yig-lx-lWS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EtV-dY-7ia"/>
@@ -108,7 +105,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XRR-5Y-7FB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3695" y="-761"/>
+            <point key="canvasLocation" x="3693.5999999999999" y="-761.46926536731644"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="nAQ-Ff-Sjo">
