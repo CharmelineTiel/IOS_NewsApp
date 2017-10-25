@@ -10,59 +10,38 @@ import UIKit
 
 class TableViewController: UITableViewController {
 
-    var articles: [Article]?
+    
+    var articles = [Article]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let baseURL = URL(string: "https://inhollandbackend.azurewebsites.net")
+        if let url = URL(string: "/api/Articles", relativeTo: baseURL){  let session = URLSession.shared
+            session.dataTask(with: url,      completionHandler:{(optData: Data?,                         response: URLResponse?,                            error: Error?) -> () in    if let data = optData{    do{
+                let json = try JSONSerialization.jsonObject(with: data,options: JSONSerialization.ReadingOptions())
 
-        
-        
-        let config = URLSessionConfiguration.default // Session Configuration
-        let session = URLSession(configuration: config) // Load configuration into Session
-        let url = URL(string: "https://inhollandbackend.azurewebsites.net/api/Articles")!
-        
-        let task = session.dataTask(with: url, completionHandler: {
-            (data, response, error) in
-            
-            if error != nil {
                 
-                print(error!.localizedDescription)
-                
-            } else {
-                
-                do {
-                    
-                    if let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? AnyObject
-                    {
-                        
-                        if let myArticles = json["Results"] as? [Article] {
-                        
-        
-                            self.articles?.append(contentsOf: myArticles)
-          
-                        
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
+                let dictionary = json as! [String:AnyObject]
 
-                        print(json)
-                            
-                        }
-                        
-                    }
+                let article = Article.modelsFromDictionaryArray(array: dictionary["Results"] as! NSArray)
+                
+                
+                for item in article {
                     
-                } catch {
-                    
-                    print("error in JSONSerialization")
-                    
+                    self.articles.append(item)
                 }
+                print(article)
+
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
                 
-                
-            }
-            
-        })
-        task.resume()
-    
+            }    catch{      print("NO JSON CONVERSION")    }  }  }).resume()}
+        
+        
+        
     
     }
 
@@ -75,21 +54,21 @@ class TableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 20
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.articles.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-         cell.textLabel?.text = articles?[indexPath.item].title as String?
+         cell.textLabel?.text = self.articles[indexPath.item].image
         
-        let url = URL(string: (articles?[indexPath.item].image)!)
+        let url = URL(string: (self.articles[indexPath.item].image)!)
         let data = try? Data(contentsOf: url!)
         cell.imageView?.image = UIImage(data: data!)
 
