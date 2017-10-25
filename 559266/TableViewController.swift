@@ -76,6 +76,17 @@ class TableViewController: UITableViewController {
     }
  
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        let data = self.articles[indexPath.item]
+        
+
+        let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "detailScreen") as! DetailViewController
+        
+        
+        secondViewController.article = data
+        
+        self.navigationController?.pushViewController(secondViewController, animated: true)
 
         
     }
