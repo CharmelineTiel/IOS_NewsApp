@@ -17,29 +17,12 @@ class TableViewController: UITableViewController {
         super.viewDidLoad()
         
         
-        let baseURL = URL(string: "https://inhollandbackend.azurewebsites.net")
-        if let url = URL(string: "/api/Articles", relativeTo: baseURL){  let session = URLSession.shared
-            session.dataTask(with: url,      completionHandler:{(optData: Data?,                         response: URLResponse?,                            error: Error?) -> () in    if let data = optData{    do{
-                let json = try JSONSerialization.jsonObject(with: data,options: JSONSerialization.ReadingOptions())
-
-                
-                let dictionary = json as! [String:AnyObject]
-
-                let article = Article.modelsFromDictionaryArray(array: dictionary["Results"] as! NSArray)
-                
-                
-                for item in article {
-                    
-                    self.articles.append(item)
-                }
-                print(article)
-
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                
-            }    catch{      print("NO JSON CONVERSION")    }  }  }).resume()}
+        let APIManager : APIManager
         
+        APIManager.getArticles(withSuccess: <#T##([[String : Any]], Int) -> ()#>, orFailure: <#T##(String) -> ()#>)
+        
+        //let baseURL = URL(string: "https://inhollandbackend.azurewebsites.net")
+
         
         
     
@@ -66,7 +49,7 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-         cell.textLabel?.text = self.articles[indexPath.item].image
+         cell.textLabel?.text = self.articles[indexPath.item].title
         
         let url = URL(string: (self.articles[indexPath.item].image)!)
         let data = try? Data(contentsOf: url!)
