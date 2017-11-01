@@ -21,12 +21,22 @@ class APIManager : APIManagerBase{
         
     }
     
-    func getFeeds(withSuccess success: ([[String:Any]])->(),                  orFailure failure: (String)->()){
-        
-        let result = get(atPath: "/Articles", withHeaders: [:], andParameters: [:], withSuccess: {_ in print("error")}, orFailure: {_ in print("error")})
-        
-        
+    func getFeeds(withSuccess success: ([[String:Any]])->(),                  orFailure failure: (String)->()){
 
+
+        }
+    func getArticles(withSuccess success: ([[String:Any]], Int)->(),                      orFailure failure: (String)->()){
+        
+        
+        _ = get(atPath: "/Articles", withHeaders: [:], andParameters: [:], withSuccess: {
+            results in print("hmm..")
+        
+            }, orFailure: {
+                _ in print("error")
+        
+        })
+        
+        
 //        func get(atPath path: String,
 //                 withHeaders headers: [String:String] = [:],
 //                 andParameters parameters: [String:AnyObject] = [:],
@@ -34,10 +44,7 @@ class APIManager : APIManagerBase{
 //                 orFailure failure: @escaping (String) -> ()) -> URLSessionDataTask{
 //            return perform(Method: "GET", fromPath: path, withHeaders: headers, andParameters: parameters, withSuccess: success, orFailure: failure)
 //        }
-        
-        }
-    func getArticles(withSuccess success: ([[String:Any]], Int)->(),                      orFailure failure: (String)->()){
-        
+//        
         
         }
     

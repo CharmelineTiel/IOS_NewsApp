@@ -3,8 +3,8 @@ import Foundation
  
 
 public class Results {
-	public var results : Array<Article>?
-	public var nextId : Int?
+    private var results : [int:Article] = [:]
+	private var nextId : Int? = nil
 
 /**
     Returns an array of models based on given dictionary.
@@ -57,4 +57,16 @@ public class Results {
 		return dictionary
 	}
 
+    
+    
+    func addArticles(fromJson jsonArticles: [[String:AnyObject]], withNextId nextId: Int){
+        for jsonArticle in jsonArticles{
+            let article = Article(json: jsonArticle)
+            
+            articles[article.id] = article
+
+        }
+    }
+    
+    
 }

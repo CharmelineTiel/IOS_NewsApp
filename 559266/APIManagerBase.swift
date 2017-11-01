@@ -17,7 +17,8 @@ class APIManagerBase{
 //        if let paramData = parameters.stringFromHttpParameters().data(using: .utf8){
 //            request.httpBody = paramData
 //        }
-//        
+        
+        
         for (key, value) in headers{
             request.addValue(value , forHTTPHeaderField: key )
         }

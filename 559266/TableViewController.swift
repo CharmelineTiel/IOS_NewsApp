@@ -12,17 +12,39 @@ class TableViewController: UITableViewController {
 
     
     var articles = [Article]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        let APIManager : APIManager
-        
-        APIManager.getArticles(withSuccess: <#T##([[String : Any]], Int) -> ()#>, orFailure: <#T##(String) -> ()#>)
+//        
+//        let APIManager : APIManager
+// 
+//        APIManager.getArticles(withSuccess: <#T##([[String : Any]], Int) -> ()#>, orFailure: <#T##(String) -> ()#>)
         
         //let baseURL = URL(string: "https://inhollandbackend.azurewebsites.net")
-
+        
+//        if let url = URL(string: "/api/Articles", relativeTo: baseURL){  let session = URLSession.shared
+//            session.dataTask(with: url,      completionHandler:{(optData: Data?,                         response: URLResponse?,                            error: Error?) -> () in    if let data = optData{    do{
+//                let json = try JSONSerialization.jsonObject(with: data,options: JSONSerialization.ReadingOptions())
+//
+//                
+//                let dictionary = json as! [String:AnyObject]
+//
+//                let article = Article.modelsFromDictionaryArray(array: dictionary["Results"] as! NSArray)
+//                
+//                
+//                for item in article {
+//                    
+//                    self.articles.append(item)
+//                }
+//                print(article)
+//
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+//                
+//            }    catch{      print("NO JSON CONVERSION")    }  }  }).resume()}
+//        
         
         
     

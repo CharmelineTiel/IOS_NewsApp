@@ -2,6 +2,7 @@
 import Foundation
 
 public class Article {
+    
 	public var id : Int?
 	public var feed : Int?
 	public var title : String?
@@ -12,6 +13,7 @@ public class Article {
 	public var related : Array<String>?
 	public var categories : Array<Category>?
 	public var isLiked : String?
+    let backend : APIManager
 
 /**
     Returns an array of models based on given dictionary.
@@ -55,6 +57,10 @@ public class Article {
 //		if (dictionary["Related"] != nil) { related = Related.modelsFromDictionaryArray(dictionary["Related"] as! NSArray) }
 //		if (dictionary["Categories"] != nil) { categories = Categories.modelsFromDictionaryArray(dictionary["Categories"] as! NSArray) }
 		isLiked = dictionary["IsLiked"] as? String
+        
+        backend.getArticles(withSuccess: <#T##([[String : Any]], Int) -> ()#>, orFailure: <#T##(String) -> ()#>)
+        
+
 	}
 
 		
@@ -78,5 +84,6 @@ public class Article {
 
 		return dictionary
 	}
-
+    
+    
 }
