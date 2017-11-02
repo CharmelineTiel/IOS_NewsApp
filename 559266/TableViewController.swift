@@ -10,11 +10,16 @@ import UIKit
 
 class TableViewController: UITableViewController {
 
-    
-    var articles = [Article]()
 
+    var articles = [Article]()
+   var articleService : ArticleService?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+      articleService?.getArticles()
+
+        
         
 //        
 //        let APIManager : APIManager

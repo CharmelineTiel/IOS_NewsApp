@@ -3,9 +3,9 @@ import Foundation
  
 
 public class Results {
-    private var results : [int:Article] = [:]
-	private var nextId : Int? = nil
-
+    
+    public var results : Array<Article>?
+    public var nextId : Int?
 /**
     Returns an array of models based on given dictionary.
     
@@ -58,15 +58,6 @@ public class Results {
 	}
 
     
-    
-    func addArticles(fromJson jsonArticles: [[String:AnyObject]], withNextId nextId: Int){
-        for jsonArticle in jsonArticles{
-            let article = Article(json: jsonArticle)
-            
-            articles[article.id] = article
-
-        }
-    }
     
     
 }

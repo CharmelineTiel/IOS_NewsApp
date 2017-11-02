@@ -19,6 +19,7 @@
 		3FDB337D1FA9F8AC00EDDEF2 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB337A1FA9F8AC00EDDEF2 /* Results.swift */; };
 		3FDB337F1FA9FBEF00EDDEF2 /* APIManagerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB337E1FA9FBEF00EDDEF2 /* APIManagerBase.swift */; };
 		3FED70971FAA44CC00251970 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FED70961FAA44CC00251970 /* APIManager.swift */; };
+		3FED709A1FAB593B00251970 /* ArticleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FED70991FAB593B00251970 /* ArticleService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		3FDB337A1FA9F8AC00EDDEF2 /* Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
 		3FDB337E1FA9FBEF00EDDEF2 /* APIManagerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManagerBase.swift; sourceTree = "<group>"; };
 		3FED70961FAA44CC00251970 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		3FED70991FAB593B00251970 /* ArticleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,8 +70,9 @@
 		3F27CC661F9F546E00804322 /* 559266 */ = {
 			isa = PBXGroup;
 			children = (
+				3FED70981FAB587700251970 /* Services */,
 				3F27CC7E1F9F567F00804322 /* controllers */,
-				3F27CC7D1F9F566C00804322 /* webservices */,
+				3F27CC7D1F9F566C00804322 /* Backend */,
 				3F27CC7C1F9F566600804322 /* views */,
 				3F27CC7B1F9F563600804322 /* models */,
 				3F27CC671F9F546E00804322 /* AppDelegate.swift */,
@@ -98,13 +101,13 @@
 			name = views;
 			sourceTree = "<group>";
 		};
-		3F27CC7D1F9F566C00804322 /* webservices */ = {
+		3F27CC7D1F9F566C00804322 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
 				3FED70961FAA44CC00251970 /* APIManager.swift */,
 				3FDB337E1FA9FBEF00EDDEF2 /* APIManagerBase.swift */,
 			);
-			name = webservices;
+			name = Backend;
 			sourceTree = "<group>";
 		};
 		3F27CC7E1F9F567F00804322 /* controllers */ = {
@@ -115,6 +118,14 @@
 				3F27CC891F9F5DDF00804322 /* TableViewController.swift */,
 			);
 			name = controllers;
+			sourceTree = "<group>";
+		};
+		3FED70981FAB587700251970 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3FED70991FAB593B00251970 /* ArticleService.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FED709A1FAB593B00251970 /* ArticleService.swift in Sources */,
 				3FDB337C1FA9F8AC00EDDEF2 /* Category.swift in Sources */,
 				3FED70971FAA44CC00251970 /* APIManager.swift in Sources */,
 				3F27CC6A1F9F546E00804322 /* LoginViewController.swift in Sources */,
