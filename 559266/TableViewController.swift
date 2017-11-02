@@ -12,19 +12,22 @@ class TableViewController: UITableViewController {
 
 
     var articles = [Article]()
-   var articleService : ArticleService?
+    let articleService = ArticleService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      articleService?.getArticles()
 
-        
-        
+//        for item in articleService.getArticles() {
 //        
-//        let APIManager : APIManager
-// 
-//        APIManager.getArticles(withSuccess: <#T##([[String : Any]], Int) -> ()#>, orFailure: <#T##(String) -> ()#>)
+//            //self.articles.append(item)
+//            print(item)
+//        }
+        print(articleService.getArticles())
+        DispatchQueue.main.async {
+          self.tableView.reloadData()
+        }
+        
         
         //let baseURL = URL(string: "https://inhollandbackend.azurewebsites.net")
         

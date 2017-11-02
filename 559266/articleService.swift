@@ -1,70 +1,47 @@
 //
-//  backend.swift
+//  ArticleService.swift
 //  559266
 //
-//  Created by Inholland Haarlem on 24-10-17.
+//  Created by Inholland Haarlem on 02-11-17.
 //  Copyright © 2017 CharmelineTiel. All rights reserved.
 //
 
 import Foundation
 
+class ArticleService : APIManagerBase {
+    
 
-public class articleService {
+func getArticles() -> [Article]{
     
-    
-    let manager : APIManager
-    
-    init()
+    var articles = [Article]()
 
-    {
+   var this = self.get(
         
-            manager.getArticles(withSuccess: <#T##([[String : Any]], Int) -> ()#>, orFailure: <#T##(String) -> ()#>)
-    }
-
+    atPath: "Articles", withHeaders: [:], andParameters: [:],
+        withSuccess: {(json: Any) -> () in let results = json
+        
+            //print(results)
     
-
-//    func getArticles()
-//    
-//    {
-//        
-//        let config = URLSessionConfiguration.default // Session Configuration
-//        let session = URLSession(configuration: config) // Load configuration into Session
-//        let url = URL(string: "https://inhollandbackend.azurewebsites.net/api/articles")!
-//        
-//        let task = session.dataTask(with: url, completionHandler: {
-//            (data, response, error) in
-//            
-//            if error != nil {
-//                
-//                print(error!.localizedDescription)
-//                
-//            } else {
-//                
-//                do {
-//                    
-//                    if let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]
-//                    {
-//                        
-//                        //self.articles = json["Results"] as? [Article]
-//                        
-//                        //Implement your logic
-//                        print(json)
-//                        
-//                    }
-//                    
-//                } catch {
-//                    
-//                    print("error in JSONSerialization")
-//                    
-//                }
-//                
-//                
+        let dictionary = results as! [String:AnyObject]
+        let array = Article.modelsFromDictionaryArray(array: dictionary["Results"] as! NSArray)
+ 
+            print(array)
+            articles = array
+//
+//            for item in array
+//            {
+//                articles.append(item)
 //            }
-//            
-//        })
-//        task.resume()
-//    }
-//    
+            
+
+    },
+        
+        orFailure: {(String) -> () in print("failed to load content")}
+        
+        )
+    
+    return articles
+    }
     
 
-    }
+}
