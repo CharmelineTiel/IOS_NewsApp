@@ -10,18 +10,31 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class ArticleService  {
+public class ArticleService  {
     
     
-    class func requestGETURL(_ strURL: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+    class func requestGetArticles(success:@escaping ([Article]) -> Void, failure:@escaping (Error) -> Void) {
         
-        Alamofire.request(strURL).responseJSON { (responseObject) -> Void in
-            
-            print(responseObject)
+        var articles = [Article]()
+        //let articlesEndpoint = "https://inhollandbackend.azurewebsites.net/api/Articles"
+        Alamofire.request(Router.get("")).responseJSON { (responseObject) -> Void in
             
             if responseObject.result.isSuccess {
-                let resJson = JSON(responseObject.result.value!)
-                success(resJson)
+                let resJson = responseObject.result.value as? [String:AnyObject]
+                
+                if let result = resJson?["Results"] as? NSArray{
+                
+                     let myArticles = Article.modelsFromDictionaryArray(array: result)
+                    
+                    for item in myArticles{
+                        
+                        articles.append(item )
+                    }
+                
+                success(articles)
+                    
+                }
+                
             }
             if responseObject.result.isFailure {
                 let error : Error = responseObject.result.error!
@@ -29,44 +42,36 @@ class ArticleService  {
             }
         }
     }
-    
-    
-//
-//func getArticles() -> [Article]{
-//    
-//    var articles = [Article]()
-//
-//   _ = self.get(
-//        
-//    atPath: "Articles", withHeaders: [:], andParameters: [:],
-//        withSuccess: {(json: Any) -> () in let results = json
-//        
-//            
-//            //print(results)
-//    
-//        let dictionary = results as! [String:AnyObject]
-//        let array = Article.modelsFromDictionaryArray(array: dictionary["Results"] as! NSArray)
-// 
-//     
-//            for item in array
-//            {
-//                articles.append(item)
-//            }
-//
-//            
-//    },
-//        
-//        orFailure: {(String) -> () in print("failed to load content")}
-//        
-//        )
-//    
-//    for item in articles
-//    {
-//        print(item.title as Any)
-//    }
-//    return articles
-//    }
-//    
-//    
 
+
+//    
+//    class func requestLikeArticle(success:@escaping ([Article]) -> Void, failure:@escaping (Error) -> Void) {
+//        
+//        var articles = [Article]()
+//        //let articlesEndpoint = "https://inhollandbackend.azurewebsites.net/api/Articles"
+//        Alamofire.request(Router.create(user)).responseJSON { (responseObject) -> Void in
+//            
+//            if responseObject.result.isSuccess {
+//                let resJson = responseObject.result.value as? [String:AnyObject]
+//                
+//                if let result = resJson?["Results"] as? NSArray{
+//                    
+//                    let myArticles = Article.modelsFromDictionaryArray(array: result)
+//                    
+//                    for item in myArticles{
+//                        
+//                        articles.append(item )
+//                    }
+//                    
+//                    success(articles)
+//                    
+//                }
+//                
+//            }
+//            if responseObject.result.isFailure {
+//                let error : Error = responseObject.result.error!
+//                failure(error)
+//            }
+//        }
+//    }
 }
