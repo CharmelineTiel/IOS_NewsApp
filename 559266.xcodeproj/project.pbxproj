@@ -15,6 +15,7 @@
 		3F27CC721F9F546E00804322 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F27CC701F9F546E00804322 /* LaunchScreen.storyboard */; };
 		3F27CC801F9F56FB00804322 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F27CC7F1F9F56FB00804322 /* DetailViewController.swift */; };
 		3F27CC8A1F9F5DDF00804322 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F27CC891F9F5DDF00804322 /* TableViewController.swift */; };
+		3F66A3C91FAC849A0094EF66 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F66A3C81FAC84990094EF66 /* API.swift */; };
 		3FDB337B1FA9F8AC00EDDEF2 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB33781FA9F8AC00EDDEF2 /* Article.swift */; };
 		3FDB337C1FA9F8AC00EDDEF2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB33791FA9F8AC00EDDEF2 /* Category.swift */; };
 		3FDB337D1FA9F8AC00EDDEF2 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB337A1FA9F8AC00EDDEF2 /* Results.swift */; };
@@ -34,6 +35,7 @@
 		3F27CC731F9F546E00804322 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F27CC7F1F9F56FB00804322 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		3F27CC891F9F5DDF00804322 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		3F66A3C81FAC84990094EF66 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3FDB33781FA9F8AC00EDDEF2 /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		3FDB33791FA9F8AC00EDDEF2 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		3FDB337A1FA9F8AC00EDDEF2 /* Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				3FDB337E1FA9FBEF00EDDEF2 /* APIManagerBase.swift */,
+				3F66A3C81FAC84990094EF66 /* API.swift */,
 			);
 			name = Backend;
 			sourceTree = "<group>";
@@ -228,10 +231,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-559266/Pods-559266-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -282,6 +287,7 @@
 				3FDB337C1FA9F8AC00EDDEF2 /* Category.swift in Sources */,
 				3F27CC6A1F9F546E00804322 /* LoginViewController.swift in Sources */,
 				3FDB337B1FA9F8AC00EDDEF2 /* Article.swift in Sources */,
+				3F66A3C91FAC849A0094EF66 /* API.swift in Sources */,
 				3FDB337F1FA9FBEF00EDDEF2 /* APIManagerBase.swift in Sources */,
 				3F27CC681F9F546E00804322 /* AppDelegate.swift in Sources */,
 				3F27CC8A1F9F5DDF00804322 /* TableViewController.swift in Sources */,

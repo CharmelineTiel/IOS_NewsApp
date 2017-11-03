@@ -7,41 +7,66 @@
 //
 
 import Foundation
+import Alamofire
+import SwiftyJSON
 
-class ArticleService : APIManagerBase {
+class ArticleService  {
     
-
-func getArticles() -> [Article]{
     
-    var articles = [Article]()
-
-   var this = self.get(
+    class func requestGETURL(_ strURL: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
-    atPath: "Articles", withHeaders: [:], andParameters: [:],
-        withSuccess: {(json: Any) -> () in let results = json
-        
-            //print(results)
+        Alamofire.request(strURL).responseJSON { (responseObject) -> Void in
+            
+            print(responseObject)
+            
+            if responseObject.result.isSuccess {
+                let resJson = JSON(responseObject.result.value!)
+                success(resJson)
+            }
+            if responseObject.result.isFailure {
+                let error : Error = responseObject.result.error!
+                failure(error)
+            }
+        }
+    }
     
-        let dictionary = results as! [String:AnyObject]
-        let array = Article.modelsFromDictionaryArray(array: dictionary["Results"] as! NSArray)
- 
-            print(array)
-            articles = array
+    
 //
+//func getArticles() -> [Article]{
+//    
+//    var articles = [Article]()
+//
+//   _ = self.get(
+//        
+//    atPath: "Articles", withHeaders: [:], andParameters: [:],
+//        withSuccess: {(json: Any) -> () in let results = json
+//        
+//            
+//            //print(results)
+//    
+//        let dictionary = results as! [String:AnyObject]
+//        let array = Article.modelsFromDictionaryArray(array: dictionary["Results"] as! NSArray)
+// 
+//     
 //            for item in array
 //            {
 //                articles.append(item)
 //            }
-            
-
-    },
-        
-        orFailure: {(String) -> () in print("failed to load content")}
-        
-        )
-    
-    return articles
-    }
-    
+//
+//            
+//    },
+//        
+//        orFailure: {(String) -> () in print("failed to load content")}
+//        
+//        )
+//    
+//    for item in articles
+//    {
+//        print(item.title as Any)
+//    }
+//    return articles
+//    }
+//    
+//    
 
 }
