@@ -12,21 +12,46 @@ class TableViewController: UITableViewController {
     
     
     var articles = [Article]()
-    
+    var nextId : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        loadArticles()
+        initialLoadArticles()
         
     }
     
     
-    func loadArticles(){
+    func initialLoadArticles(){
         
         
         ArticleService.requestGetArticles(success: {
+            (JSONResponse) -> Void in
+            print(JSONResponse)
+            
+            var myArticles = Article.modelsFromDictionaryArray(array: JSONResponse["Results"] as! NSArray)
+
+            for item in myArticles{
+                
+                self.articles.append(item)
+            }
+            
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }) {
+            (error) -> Void in
+            print(error)
+        }
+        
+        
+    }
+    func loadMoreArticles(){
+        
+        
+        ArticleService.requestGetMoreArticles(nextId: nextId,success: {
             (JSONResponse) -> Void in
             print(JSONResponse)
             
@@ -75,6 +100,16 @@ class TableViewController: UITableViewController {
         cell.imageView?.image = UIImage(data: data!)
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView,
+                   willDisplay cell: UITableViewCell,
+                   forRowAt indexPath: IndexPath)
+    {
+        // At the bottom...
+        if (indexPath.row == self.articles.count - 1) {
+            loadMoreArticles() // network request to get more data
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

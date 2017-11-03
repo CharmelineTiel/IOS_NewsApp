@@ -13,27 +13,15 @@ import SwiftyJSON
 public class ArticleService  {
     
     
-    class func requestGetArticles(success:@escaping ([Article]) -> Void, failure:@escaping (Error) -> Void) {
+    class func requestGetArticles(success:@escaping ([String:AnyObject]) -> Void, failure:@escaping (Error) -> Void) {
         
-        var articles = [Article]()
-        //let articlesEndpoint = "https://inhollandbackend.azurewebsites.net/api/Articles"
+
         Alamofire.request(Router.get("")).responseJSON { (responseObject) -> Void in
             
             if responseObject.result.isSuccess {
-                let resJson = responseObject.result.value as? [String:AnyObject]
-                
-                if let result = resJson?["Results"] as? NSArray{
-                
-                     let myArticles = Article.modelsFromDictionaryArray(array: result)
-                    
-                    for item in myArticles{
-                        
-                        articles.append(item )
-                    }
-                
-                success(articles)
-                    
-                }
+                let resJson = responseObject.result.value as! [String : AnyObject]
+    
+                success(resJson)
                 
             }
             if responseObject.result.isFailure {
@@ -44,6 +32,34 @@ public class ArticleService  {
     }
 
 
+    class func requestGetMoreArticles(nextId: String, success:@escaping ([Article]) -> Void, failure:@escaping (Error) -> Void) {
+        
+        var articles = [Article]()
+        Alamofire.request(Router.get(nextId)).responseJSON { (responseObject) -> Void in
+            
+            if responseObject.result.isSuccess {
+                let resJson = responseObject.result.value as? [String:AnyObject]
+                
+                if let result = resJson?["Results"] as? NSArray{
+                    
+                    let myArticles = Article.modelsFromDictionaryArray(array: result)
+                    
+                    for item in myArticles{
+                        
+                        articles.append(item )
+                    }
+                    
+                    success(articles)
+                    
+                }
+                
+            }
+            if responseObject.result.isFailure {
+                let error : Error = responseObject.result.error!
+                failure(error)
+            }
+        }
+    }
 //    
 //    class func requestLikeArticle(success:@escaping ([Article]) -> Void, failure:@escaping (Error) -> Void) {
 //        
