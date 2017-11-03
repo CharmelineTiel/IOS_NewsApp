@@ -99,7 +99,7 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         cell.textLabel?.text = self.articles[indexPath.item].title
-        
+        cell.textLabel?.text = self.articles[indexPath.item].isLiked
         let url = URL(string: (self.articles[indexPath.item].image)!)
         let data = try? Data(contentsOf: url!)
         cell.imageView?.image = UIImage(data: data!)

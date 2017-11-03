@@ -14,9 +14,16 @@ public class ArticleService  {
     
     
     class func requestGetArticles(success:@escaping ([String:AnyObject]) -> Void, failure:@escaping (Error) -> Void) {
+    
         
+        let headers: HTTPHeaders = [
+            "x-authtoken": AuthToken.getToken(),
+            "Accept": "application/json"
+        ]
+    
 
-        Alamofire.request(Router.get("")).responseJSON { (responseObject) -> Void in
+        let url = "https://inhollandbackend.azurewebsites.net/api/Articles/"
+        Alamofire.request(url, method: .get,  encoding: URLEncoding.default, headers: headers).responseJSON { (responseObject) -> Void in
             
             if responseObject.result.isSuccess {
                 let resJson = responseObject.result.value as! [String : AnyObject]
@@ -35,9 +42,14 @@ public class ArticleService  {
     class func requestGetMoreArticles(nextId: String, success:@escaping ([String:AnyObject]) -> Void, failure:@escaping (Error) -> Void) {
         
         let amountOfArticles : Int = 20
+        let headers: HTTPHeaders? = [
+            "x-authtoken": AuthToken.getToken(),
+            "Accept": "application/json"
+        ]
+
         let url = "https://inhollandbackend.azurewebsites.net/api/Articles/\(nextId)?count=\(amountOfArticles)"
 
-          Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON{ (responseObject) -> Void in
+          Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON{ (responseObject) -> Void in
             
             if responseObject.result.isSuccess {
                 let resJson = responseObject.result.value as! [String:AnyObject]
@@ -52,34 +64,5 @@ public class ArticleService  {
             }
         }
     }
-//    
-//    class func requestLikeArticle(success:@escaping ([Article]) -> Void, failure:@escaping (Error) -> Void) {
-//        
-//        var articles = [Article]()
-//        //let articlesEndpoint = "https://inhollandbackend.azurewebsites.net/api/Articles"
-//        Alamofire.request(Router.create(user)).responseJSON { (responseObject) -> Void in
-//            
-//            if responseObject.result.isSuccess {
-//                let resJson = responseObject.result.value as? [String:AnyObject]
-//                
-//                if let result = resJson?["Results"] as? NSArray{
-//                    
-//                    let myArticles = Article.modelsFromDictionaryArray(array: result)
-//                    
-//                    for item in myArticles{
-//                        
-//                        articles.append(item )
-//                    }
-//                    
-//                    success(articles)
-//                    
-//                }
-//                
-//            }
-//            if responseObject.result.isFailure {
-//                let error : Error = responseObject.result.error!
-//                failure(error)
-//            }
-//        }
-//    }
+
 }

@@ -26,10 +26,14 @@ class LoginViewController: UIViewController {
             
             UserService.requestLogin(username: username.text!, password: password.text!, success: {
                 (JSONResponse) -> Void in
-                print(JSONResponse)
+
+                AuthToken.setToken(authToken: JSONResponse)
+
+                //navigate back to home
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeScreen") as! UITabBarController
+                self.present(nextViewController, animated:true, completion:nil)
                 
-                
- 
             }) {
                 (error) -> Void in
                 print(error)
