@@ -34,9 +34,9 @@ public class ArticleService  {
 
     class func requestGetMoreArticles(nextId: String, success:@escaping ([String:AnyObject]) -> Void, failure:@escaping (Error) -> Void) {
         
-        let url = "https://inhollandbackend.azurewebsites.net/api/Articles/\(nextId)?count=20"
-        //let params: [String: Any] = ["count": "20"]
-        
+        let amountOfArticles : Int = 20
+        let url = "https://inhollandbackend.azurewebsites.net/api/Articles/\(nextId)?count=\(amountOfArticles)"
+
           Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON{ (responseObject) -> Void in
             
             if responseObject.result.isSuccess {

@@ -34,12 +34,10 @@ class TableViewController: UITableViewController {
             let myArticles = Article.modelsFromDictionaryArray(array: JSONResponse["Results"] as! NSArray)
 
             self.nextId = JSONResponse["NextId"] as! Int
-            print(self.nextId)
             for item in myArticles{
                 
                 self.articles.append(item)
             }
-            
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -62,7 +60,7 @@ class TableViewController: UITableViewController {
             let myArticles = Article.modelsFromDictionaryArray(array: JSONResponse["Results"] as! NSArray)
             
             self.nextId = JSONResponse["NextId"] as! Int
-            
+    
             for item in myArticles {
                 
                 self.articles.append(item)
@@ -113,9 +111,10 @@ class TableViewController: UITableViewController {
                    willDisplay cell: UITableViewCell,
                    forRowAt indexPath: IndexPath)
     {
-        // At the bottom...
+        
+       //TODO: add pending requests check
         if (indexPath.row == self.articles.count - 1) {
-            loadMoreArticles() // network request to get more data
+            loadMoreArticles()
         }
     }
     
