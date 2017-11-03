@@ -32,26 +32,18 @@ public class ArticleService  {
     }
 
 
-    class func requestGetMoreArticles(nextId: String, success:@escaping ([Article]) -> Void, failure:@escaping (Error) -> Void) {
+    class func requestGetMoreArticles(nextId: String, success:@escaping ([String:AnyObject]) -> Void, failure:@escaping (Error) -> Void) {
         
-        var articles = [Article]()
-        Alamofire.request(Router.get(nextId)).responseJSON { (responseObject) -> Void in
+        let url = "https://inhollandbackend.azurewebsites.net/api/Articles/\(nextId)?count=20"
+        //let params: [String: Any] = ["count": "20"]
+        
+          Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON{ (responseObject) -> Void in
             
             if responseObject.result.isSuccess {
-                let resJson = responseObject.result.value as? [String:AnyObject]
-                
-                if let result = resJson?["Results"] as? NSArray{
+                let resJson = responseObject.result.value as! [String:AnyObject]
+
                     
-                    let myArticles = Article.modelsFromDictionaryArray(array: result)
-                    
-                    for item in myArticles{
-                        
-                        articles.append(item )
-                    }
-                    
-                    success(articles)
-                    
-                }
+                    success(resJson)
                 
             }
             if responseObject.result.isFailure {

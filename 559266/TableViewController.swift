@@ -12,7 +12,8 @@ class TableViewController: UITableViewController {
     
     
     var articles = [Article]()
-    var nextId : String = ""
+    var nextId : Int = 0
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +31,10 @@ class TableViewController: UITableViewController {
             (JSONResponse) -> Void in
             print(JSONResponse)
             
-            var myArticles = Article.modelsFromDictionaryArray(array: JSONResponse["Results"] as! NSArray)
+            let myArticles = Article.modelsFromDictionaryArray(array: JSONResponse["Results"] as! NSArray)
 
+            self.nextId = JSONResponse["NextId"] as! Int
+            print(self.nextId)
             for item in myArticles{
                 
                 self.articles.append(item)
@@ -51,12 +54,16 @@ class TableViewController: UITableViewController {
     func loadMoreArticles(){
         
         
-        ArticleService.requestGetMoreArticles(nextId: nextId,success: {
+        ArticleService.requestGetMoreArticles(nextId: "\(nextId)",success: {
             (JSONResponse) -> Void in
             print(JSONResponse)
             
             
-            for item in JSONResponse {
+            let myArticles = Article.modelsFromDictionaryArray(array: JSONResponse["Results"] as! NSArray)
+            
+            self.nextId = JSONResponse["NextId"] as! Int
+            
+            for item in myArticles {
                 
                 self.articles.append(item)
             }
