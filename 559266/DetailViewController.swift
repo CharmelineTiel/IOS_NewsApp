@@ -24,8 +24,16 @@ class DetailViewController: UIViewController {
         summary.text = article?.summary
         
 
-        likedLbl.text = String(describing: (article?.isLiked))
-        
+        if (article?.isLiked)! {
+            
+            likedLbl.text = String("Liked")
+            
+        }else{
+            
+            likedLbl.text = String("Not liked")
+            
+        }
+   
         
         //print(article?.isLiked as String)
         let url = URL(string: (article?.image!)!)
