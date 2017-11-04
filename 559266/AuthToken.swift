@@ -11,7 +11,7 @@ import Foundation
 public final class AuthToken{
     
     
-    public static var authToken : String?
+    public static var authToken : String = ""
     
     private init() {
         
@@ -26,7 +26,7 @@ public final class AuthToken{
     static func getToken() -> String
     {
 
-            return authToken!
+            return authToken
 
 
     }

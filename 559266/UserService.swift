@@ -37,4 +37,24 @@ public class UserService  {
         }
 }
 
+    
+    class func requestRegister(username: String, password:String, success:@escaping (String) -> Void, failure:@escaping (Error) -> Void) {
+        
+        let url = "https://inhollandbackend.azurewebsites.net/api/users/register"
+        let parameters: [String: Any] = ["UserName": "\(username)", "Password": "\(password)"]
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ (responseObject) -> Void in
+            
+            if responseObject.result.isSuccess {
+                
+                success("geregistreerd")
+                
+                
+            }
+            if responseObject.result.isFailure {
+                let error : Error = responseObject.result.error!
+                failure(error)
+            }
+        }
+    }
+    
 }

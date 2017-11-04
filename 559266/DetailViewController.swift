@@ -15,6 +15,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var summary: UITextView!
+    @IBOutlet weak var likedLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +23,15 @@ class DetailViewController: UIViewController {
         titleLbl.text = article?.title
         summary.text = article?.summary
         
+
+        likedLbl.text = String(describing: (article?.isLiked))
+        
+        
+        //print(article?.isLiked as String)
         let url = URL(string: (article?.image!)!)
         let data = try? Data(contentsOf: url!)
         image.image = UIImage(data: data!)
         
-
     }
 
     override func didReceiveMemoryWarning() {

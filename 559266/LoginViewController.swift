@@ -10,13 +10,27 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var LoggedInLbl: UILabel!
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if AuthToken.getToken() != ""
+        {
+            
+            LoggedInLbl.text = "Je bent al ingelogd.."
+        }
         
+    }
+    @IBAction func RegisterBtn(_ sender: Any) {
+   
+                //navigate back to home
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "RegisterScreen")
+                self.present(nextViewController, animated:true, completion:nil)
+
     }
 
     @IBAction func loginBtn(_ sender: Any) {
@@ -29,6 +43,7 @@ class LoginViewController: UIViewController {
 
                 AuthToken.setToken(authToken: JSONResponse)
 
+                print(AuthToken.getToken())
                 //navigate back to home
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeScreen") as! UITabBarController
@@ -44,6 +59,7 @@ class LoginViewController: UIViewController {
             print("voer aub alles in")
         }
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

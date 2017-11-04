@@ -12,7 +12,7 @@ public class Article {
 	public var url : String?
 	public var related : Array<String>?
 	public var categories : Array<Category>?
-	public var isLiked : String?
+	public var isLiked : Bool!
 
 /**
     Returns an array of models based on given dictionary.
@@ -55,7 +55,7 @@ public class Article {
 		url = dictionary["Url"] as? String
 //		if (dictionary["Related"] != nil) { related = Related.modelsFromDictionaryArray(dictionary["Related"] as! NSArray) }
 //		if (dictionary["Categories"] != nil) { categories = Categories.modelsFromDictionaryArray(dictionary["Categories"] as! NSArray) }
-		isLiked = dictionary["IsLiked"] as? String
+		isLiked = dictionary["IsLiked"] as! Bool
         
 
 	}

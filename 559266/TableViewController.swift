@@ -29,15 +29,16 @@ class TableViewController: UITableViewController {
         
         ArticleService.requestGetArticles(success: {
             (JSONResponse) -> Void in
-            print(JSONResponse)
-            
+         
             let myArticles = Article.modelsFromDictionaryArray(array: JSONResponse["Results"] as! NSArray)
 
             self.nextId = JSONResponse["NextId"] as! Int
             for item in myArticles{
                 
                 self.articles.append(item)
+                
             }
+        
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -54,8 +55,7 @@ class TableViewController: UITableViewController {
         
         ArticleService.requestGetMoreArticles(nextId: "\(nextId)",success: {
             (JSONResponse) -> Void in
-            print(JSONResponse)
-            
+           
             
             let myArticles = Article.modelsFromDictionaryArray(array: JSONResponse["Results"] as! NSArray)
             
@@ -99,7 +99,6 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         cell.textLabel?.text = self.articles[indexPath.item].title
-        cell.textLabel?.text = self.articles[indexPath.item].isLiked
         let url = URL(string: (self.articles[indexPath.item].image)!)
         let data = try? Data(contentsOf: url!)
         cell.imageView?.image = UIImage(data: data!)
