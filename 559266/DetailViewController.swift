@@ -18,50 +18,16 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var summary: UITextView!
       var articleId = ""
-    //var articleId:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      
-        if (article?.isLiked)! {
-            
-            likedBtn.setTitle("Liked", for: .normal)
-        }else{
-            
-            likedBtn.setTitle("Not liked", for: .normal)
-        }
-        
-        
-        if AuthToken.getToken() != "" {
-            
-            likedBtn.isEnabled = true
-            
-        }else{
-            
-           likedBtn.isEnabled = false
-            
-        }
-        if let id = article?.id {
-            articleId = "\(id)"
-        }
-        
-        titleLbl.text = article?.title
-     
-        summary.text = article?.summary
-        
-        likedBtn.addTarget(self, action:#selector(likeArticle), for: .touchUpInside)
-        
-        //print(article?.isLiked as String)
-        let url = URL(string: (article?.image!)!)
-        let data = try? Data(contentsOf: url!)
-        image.image = UIImage(data: data!)
+
         
     }
 
     func likeArticle(){
         
-    
         
         if (article?.isLiked == true) {
             
@@ -94,6 +60,71 @@ class DetailViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+        if Reachability.isConnectedToNetwork(){
+            
+            if (article?.isLiked)! {
+                
+                likedBtn.setTitle("Liked", for: .normal)
+            }else{
+                
+                likedBtn.setTitle("Not liked", for: .normal)
+            }
+            
+            
+            if AuthToken.getToken() != "" {
+                
+                likedBtn.isEnabled = true
+                
+            }else{
+                
+                likedBtn.isEnabled = false
+                
+            }
+            if let id = article?.id {
+                articleId = "\(id)"
+            }
+            
+            titleLbl.text = article?.title
+            
+            summary.text = article?.summary
+            
+            likedBtn.addTarget(self, action:#selector(likeArticle), for: .touchUpInside)
+            
+            //print(article?.isLiked as String)
+            let url = URL(string: (article?.image!)!)
+            let data = try? Data(contentsOf: url!)
+            image.image = UIImage(data: data!)
+            
+        }else{
+            
+            alertMessage()
+        }
+        
+        
+        
+    }
+    
+    
+    func alertMessage()
+    {
+        
+        let alertController = UIAlertController(title: "Geen verbinding", message:
+            "Geen internet verbinding..", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let okAction = UIAlertAction(title: "Probeer opnieuw", style: UIAlertActionStyle.default) {
+            (result : UIAlertAction) -> Void in
+            
+            self.loadView()
+        }
+        
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated:true, completion:nil)
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

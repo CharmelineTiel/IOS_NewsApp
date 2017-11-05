@@ -16,12 +16,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if AuthToken.getToken() != ""
-        {
-            
-            LoggedInLbl.text = "Je bent al ingelogd.."
-        }
+
         
     }
     @IBAction func RegisterBtn(_ sender: Any) {
@@ -30,34 +25,45 @@ class LoginViewController: UIViewController {
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextViewController = storyBoard.instantiateViewController(withIdentifier: "RegisterScreen")
                 self.present(nextViewController, animated:true, completion:nil)
-
     }
 
     @IBAction func loginBtn(_ sender: Any) {
         
-        if username.text != "" && password.text != ""{
+        if Reachability.isConnectedToNetwork(){
             
-            
-            UserService.requestLogin(username: username.text!, password: password.text!, success: {
-                (JSONResponse) -> Void in
-
-                AuthToken.setToken(authToken: JSONResponse)
-
-                print(AuthToken.getToken())
-                //navigate back to home
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeScreen") as! UITabBarController
-                self.present(nextViewController, animated:true, completion:nil)
+          
+            if username.text != "" && password.text != ""{
                 
-            }) {
-                (error) -> Void in
-                print(error)
+                
+                UserService.requestLogin(username: username.text!, password: password.text!, success: {
+                    (JSONResponse) -> Void in
+                    
+                    AuthToken.setToken(authToken: JSONResponse)
+                    
+                    print(AuthToken.getToken())
+                    //navigate back to home
+                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeScreen") as! UITabBarController
+                    self.present(nextViewController, animated:true, completion:nil)
+                    
+                }) {
+                    (error) -> Void in
+                    print(error)
+                }
             }
-        }
             else{
+                
+                print("voer aub alles in")
+            }
             
-            print("voer aub alles in")
+            
+        }else{
+            
+            alertMessage()
         }
+        
+        
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,6 +71,23 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func alertMessage()
+    {
+        
+        let alertController = UIAlertController(title: "Geen verbinding", message:
+            "Geen internet verbinding..", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let okAction = UIAlertAction(title: "Probeer opnieuw", style: UIAlertActionStyle.default) {
+            (result : UIAlertAction) -> Void in
+            
+            self.loadView()
+        }
+        
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated:true, completion:nil)
+        
+    }
 
 }
 

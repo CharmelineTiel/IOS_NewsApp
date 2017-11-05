@@ -15,6 +15,7 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -26,65 +27,95 @@ class RegisterViewController: UIViewController {
     @IBAction func RegisterBtn(_ sender: Any) {
         
         
-        if username.text != "" && password.text != ""{
+        
+        if Reachability.isConnectedToNetwork(){
             
-            
-            UserService.requestRegister(username: username.text!, password: password.text!, success: {
-                (JSONResponse) -> Void in
+            if username.text != "" && password.text != ""{
                 
-                print(JSONResponse)
                 
-            
-                
-                if (JSONResponse["Success"] != nil && JSONResponse["Success"]! as! Bool){
-                
+                UserService.requestRegister(username: username.text!, password: password.text!, success: {
+                    (JSONResponse) -> Void in
                     
-                    let alertController = UIAlertController(title: "Success", message:
-                        JSONResponse["Message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
+                    print(JSONResponse)
                     
                     
-                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
-                        (result : UIAlertAction) -> Void in
-
-                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginScreen")
-                        self.present(nextViewController, animated:true, completion:nil)
+                    
+                    if (JSONResponse["Success"] != nil && JSONResponse["Success"]! as! Bool){
+                        
+                        
+                        let alertController = UIAlertController(title: "Success", message:
+                            JSONResponse["Message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        
+                        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+                            (result : UIAlertAction) -> Void in
+                            
+                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginScreen")
+                            self.present(nextViewController, animated:true, completion:nil)
+                        }
+                        
+                        
+                        alertController.addAction(okAction)
+                        self.present(alertController, animated:true, completion:nil)
+                        
+                        
+                    }else  {
+                        
+                        
+                        
+                        let alertController = UIAlertController(title: "Failure", message:
+                            JSONResponse["Message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
+                        
+                        self.present(alertController, animated: true, completion: nil)
+                        
+                        
                     }
                     
                     
-                    alertController.addAction(okAction)
-                    self.present(alertController, animated:true, completion:nil)
-     
-                
-                }else  {
                     
-    
-                    
-                    let alertController = UIAlertController(title: "Failure", message:
-                        JSONResponse["Message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
-                    
-                    self.present(alertController, animated: true, completion: nil)
-                    
-           
+                }) {
+                    (error) -> Void in
+                    print(error)
                 }
-                
-         
-                
-            }) {
-                (error) -> Void in
-                print(error)
             }
-        }
-        else{
+            else{
+                
+                print("voer aub alles in")
+            }
+
             
-            print("voer aub alles in")
+        }else{
+            
+            alertMessage()
+            
         }
-    }
+        
+        
+       }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+
+    func alertMessage()
+    {
+        
+        let alertController = UIAlertController(title: "Geen verbinding", message:
+            "Geen internet verbinding..", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let okAction = UIAlertAction(title: "Probeer opnieuw", style: UIAlertActionStyle.default) {
+            (result : UIAlertAction) -> Void in
+            
+            self.loadView()
+        }
+        
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated:true, completion:nil)
+        
+    }
 
 }

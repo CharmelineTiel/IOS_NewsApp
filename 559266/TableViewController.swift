@@ -19,7 +19,14 @@ class TableViewController: UITableViewController {
         super.viewDidLoad()
         
         
-        initialLoadArticles()
+        if Reachability.isConnectedToNetwork(){
+            
+             initialLoadArticles()
+        }else{
+            
+           alertMessage()
+        }
+        
         
     }
     
@@ -96,12 +103,12 @@ class TableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        
-        
+      
         let cell:ArticleCell = self.tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ArticleCell
         
+        if Reachability.isConnectedToNetwork(){
+        
+       
         cell.Title?.text = self.articles[indexPath.item].title
         let url = URL(string: (self.articles[indexPath.item].image)!)
         let data = try? Data(contentsOf: url!)
@@ -112,10 +119,13 @@ class TableViewController: UITableViewController {
         }else{
             cell.LikedLbl.text = "Not liked"
         }
+            
         
-       
-    
- 
+        }else{
+            
+            alertMessage()
+            
+        }
         
         return cell
     }
@@ -127,7 +137,16 @@ class TableViewController: UITableViewController {
         
        //TODO: add pending requests check
         if (indexPath.row == self.articles.count - 1) {
-            loadMoreArticles()
+            
+            if Reachability.isConnectedToNetwork(){
+                
+                 loadMoreArticles()
+            }else{
+               
+                
+            }
+            
+          
         }
     }
     
@@ -149,7 +168,32 @@ class TableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         
-         self.tableView.reloadData()
+        if Reachability.isConnectedToNetwork(){
+         
+             self.tableView.reloadData()
+        }else{
+            
+           alertMessage()
+        }
+        
+        
+    }
+    
+    func alertMessage()
+    {
+        
+        let alertController = UIAlertController(title: "Geen verbinding", message:
+            "Geen internet verbinding..", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let okAction = UIAlertAction(title: "Probeer opnieuw", style: UIAlertActionStyle.default) {
+            (result : UIAlertAction) -> Void in
+            
+            self.tableView.reloadData()
+        }
+        
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated:true, completion:nil)
         
     }
     /*
