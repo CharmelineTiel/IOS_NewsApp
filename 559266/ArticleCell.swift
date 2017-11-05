@@ -13,15 +13,13 @@ class ArticleCell: UITableViewCell {
     //@IBOutlet weak var myImage: UIImageView!
     @IBOutlet weak var thumbnail: UIImageView!
 
+    @IBOutlet weak var LikedLbl: UILabel!
     @IBOutlet weak var Title: UILabel!
-    @IBAction func likeBtn(_ sender: Any) {
-        
-            print("liked")
-    }
+   
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        Title.numberOfLines = 2
+    
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

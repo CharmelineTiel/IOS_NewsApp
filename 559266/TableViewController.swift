@@ -106,7 +106,14 @@ class TableViewController: UITableViewController {
         let url = URL(string: (self.articles[indexPath.item].image)!)
         let data = try? Data(contentsOf: url!)
         cell.thumbnail.image = UIImage(data: data!)
-        //cell.likeBtn(Any)
+        
+        if self.articles[indexPath.item].isLiked as Bool {
+            cell.LikedLbl.text = "Liked"
+        }else{
+            cell.LikedLbl.text = "Not liked"
+        }
+        
+       
     
  
         
@@ -139,7 +146,12 @@ class TableViewController: UITableViewController {
         
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+         self.tableView.reloadData()
+        
+    }
     /*
      // Override to support conditional editing of the table view.
      override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

@@ -24,6 +24,24 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         
       
+        if (article?.isLiked)! {
+            
+            likedBtn.setTitle("Liked", for: .normal)
+        }else{
+            
+            likedBtn.setTitle("Not liked", for: .normal)
+        }
+        
+        
+        if AuthToken.getToken() != "" {
+            
+            likedBtn.isEnabled = true
+            
+        }else{
+            
+           likedBtn.isEnabled = false
+            
+        }
         if let id = article?.id {
             articleId = "\(id)"
         }
@@ -43,21 +61,37 @@ class DetailViewController: UIViewController {
 
     func likeArticle(){
         
-        ArticleService.requestLikeArticle(articleId:  "\(articleId)",success: {
-            (JSONResponse) -> Void in
+    
+        
+        if (article?.isLiked == true) {
             
-            if (self.article?.isLiked)! {
-            self.likedBtn.setTitle("Liked", for: .normal)
+            
+            ArticleService.requestUnlikeArticle(articleId:  "\(articleId)",success: {
+                (JSONResponse) -> Void in
                 
-            }else{
-                
-                 self.likedBtn.setTitle("not liked", for: .normal)
+            }) {
+                (error) -> Void in
+                print(error)
             }
-             print(self.article?.id as Any)
-        }) {
-            (error) -> Void in
-            print(error)
+            article?.isLiked = false
+            self.likedBtn.setTitle("not liked", for: .normal)
+            
+            
+        }else{
+            
+            ArticleService.requestLikeArticle(articleId:  "\(articleId)",success: {
+                (JSONResponse) -> Void in
+                
+            }) {
+                (error) -> Void in
+                print(error)
+            }
+            
+            article?.isLiked = true
+            self.likedBtn.setTitle("Liked", for: .normal)
+            
         }
+        
     }
     
     override func didReceiveMemoryWarning() {

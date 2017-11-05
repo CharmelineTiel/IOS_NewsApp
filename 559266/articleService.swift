@@ -114,4 +114,36 @@ public class ArticleService  {
             }
         }
     }
+    
+    
+    class func requestUnlikeArticle(articleId: String, success:@escaping (String) -> Void, failure:@escaping (Error) -> Void) {
+        
+        
+        var headers: HTTPHeaders = [:]
+        
+        if AuthToken.getToken() != "" {
+            
+            headers = [
+                
+                "x-authtoken": AuthToken.getToken(),
+                "Accept": "application/json"
+                
+            ]
+        }
+        
+        let url = "https://inhollandbackend.azurewebsites.net/api/Articles/\(articleId)/like"
+        
+        Alamofire.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers).responseJSON{ (responseObject) -> Void in
+            
+            if responseObject.result.isSuccess {
+                
+                success("gelukt")
+                
+            }
+            if responseObject.result.isFailure {
+                let error : Error = responseObject.result.error!
+                failure(error)
+            }
+        }
+    }
 }

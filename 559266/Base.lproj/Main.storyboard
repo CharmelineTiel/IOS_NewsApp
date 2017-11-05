@@ -24,37 +24,33 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="h7o-3C-TTp" id="et7-P4-nja">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="99"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zdm-6s-8up">
-                                            <rect key="frame" x="11" y="69" width="46" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="46" id="6Xs-fV-hMH"/>
-                                            </constraints>
-                                            <state key="normal" title="Like"/>
-                                            <connections>
-                                                <action selector="likeBtn:" destination="h7o-3C-TTp" eventType="touchUpInside" id="Zac-YX-iQQ"/>
-                                            </connections>
-                                        </button>
                                         <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tte-u9-iB2">
                                             <rect key="frame" x="11" y="3" width="103" height="72"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="103" id="QWY-xk-AJu"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjf-a2-NWY">
-                                            <rect key="frame" x="122" y="40.5" width="212" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjf-a2-NWY">
+                                            <rect key="frame" x="122" y="40" width="212" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QM-OH-RAg">
+                                            <rect key="frame" x="11" y="78" width="103" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.91323202848434448" green="0.71711570024490356" blue="0.4904789924621582" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="Zdm-6s-8up" secondAttribute="bottom" id="6xM-qi-Q7Z"/>
                                         <constraint firstItem="Tte-u9-iB2" firstAttribute="top" secondItem="et7-P4-nja" secondAttribute="topMargin" constant="-5" id="ANv-Cs-mQ5"/>
                                         <constraint firstItem="gjf-a2-NWY" firstAttribute="leading" secondItem="Tte-u9-iB2" secondAttribute="trailing" constant="8" id="N6x-uq-B5E"/>
-                                        <constraint firstItem="Tte-u9-iB2" firstAttribute="leading" secondItem="Zdm-6s-8up" secondAttribute="leading" id="RLc-24-FLV"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Tte-u9-iB2" secondAttribute="bottom" constant="16" id="gHY-Sc-VYx"/>
                                         <constraint firstItem="Tte-u9-iB2" firstAttribute="leading" secondItem="et7-P4-nja" secondAttribute="leadingMargin" constant="3" id="pX6-EY-U9S"/>
                                         <constraint firstAttribute="trailing" secondItem="gjf-a2-NWY" secondAttribute="trailing" constant="8" id="pvQ-5F-Sh5"/>
@@ -62,6 +58,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="LikedLbl" destination="1QM-OH-RAg" id="kcm-sx-pQj"/>
                                     <outlet property="Title" destination="gjf-a2-NWY" id="2uj-RJ-HLq"/>
                                     <outlet property="thumbnail" destination="Tte-u9-iB2" id="cBM-au-MOS"/>
                                 </connections>
