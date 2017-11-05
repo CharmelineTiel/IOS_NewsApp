@@ -32,12 +32,38 @@ class RegisterViewController: UIViewController {
             UserService.requestRegister(username: username.text!, password: password.text!, success: {
                 (JSONResponse) -> Void in
                 
-                AuthToken.setToken(authToken: JSONResponse)
+                print(JSONResponse)
                 
-                //navigate to login
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginScreen") 
-                self.present(nextViewController, animated:true, completion:nil)
+            
+                
+                if (JSONResponse["Success"] != nil && JSONResponse["Success"]! as! Bool){
+                
+                    
+                    let alertController = UIAlertController(title: "Success", message:
+                        JSONResponse["Message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                    //navigate to login
+                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginScreen") as! UITabBarController
+                    self.present(nextViewController, animated:true, completion:nil)
+                
+                }else  {
+                    
+    
+                    
+                    let alertController = UIAlertController(title: "Failure", message:
+                        JSONResponse["Message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                    
+           
+                }
+                
+         
                 
             }) {
                 (error) -> Void in
@@ -53,7 +79,6 @@ class RegisterViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
 
 }
