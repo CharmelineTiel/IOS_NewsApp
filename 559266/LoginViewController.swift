@@ -66,6 +66,17 @@ class LoginViewController: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        
+        if AuthToken.getToken() != ""{
+            
+            
+        }else{
+            
+            
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

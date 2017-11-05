@@ -13,6 +13,7 @@ class DetailViewController: UIViewController {
     var article:Article?
 
 
+    @IBOutlet weak var urlBtn: UIButton!
     @IBOutlet weak var likedBtn: UIButton!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
@@ -25,6 +26,7 @@ class DetailViewController: UIViewController {
 
         
     }
+    
 
     func likeArticle(){
         
@@ -59,6 +61,18 @@ class DetailViewController: UIViewController {
         }
         
     }
+    func getFullArticle()
+    {
+    
+        guard let url = URL(string: (article?.url)!) else {
+            return
+        }
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -92,8 +106,8 @@ class DetailViewController: UIViewController {
             summary.text = article?.summary
             
             likedBtn.addTarget(self, action:#selector(likeArticle), for: .touchUpInside)
-            
-            //print(article?.isLiked as String)
+            urlBtn.addTarget(self, action:#selector(getFullArticle), for: .touchUpInside)
+
             let url = URL(string: (article?.image!)!)
             let data = try? Data(contentsOf: url!)
             image.image = UIImage(data: data!)

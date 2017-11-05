@@ -43,7 +43,7 @@ class RegisterViewController: UIViewController {
                     if (JSONResponse["Success"] != nil && JSONResponse["Success"]! as! Bool){
                         
                         
-                        let alertController = UIAlertController(title: "Success", message:
+                        let alertController = UIAlertController(title: "Geregistreerd", message:
                             JSONResponse["Message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
                         
                         
@@ -64,7 +64,7 @@ class RegisterViewController: UIViewController {
                         
                         
                         
-                        let alertController = UIAlertController(title: "Failure", message:
+                        let alertController = UIAlertController(title: "Oeps..", message:
                             JSONResponse["Message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
                         alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
                         
