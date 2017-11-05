@@ -11,29 +11,28 @@ import UIKit
 class DetailViewController: UIViewController {
 
     var article:Article?
-    
+
+
+    @IBOutlet weak var likedBtn: UIButton!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var summary: UITextView!
-    @IBOutlet weak var likedLbl: UILabel!
+      var articleId = ""
+    //var articleId:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+      
+        if let id = article?.id {
+            articleId = "\(id)"
+        }
+        
         titleLbl.text = article?.title
+     
         summary.text = article?.summary
         
-
-        if (article?.isLiked)! {
-            
-            likedLbl.text = String("Liked")
-            
-        }else{
-            
-            likedLbl.text = String("Not liked")
-            
-        }
-   
+        likedBtn.addTarget(self, action:#selector(likeArticle), for: .touchUpInside)
         
         //print(article?.isLiked as String)
         let url = URL(string: (article?.image!)!)
@@ -42,6 +41,25 @@ class DetailViewController: UIViewController {
         
     }
 
+    func likeArticle(){
+        
+        ArticleService.requestLikeArticle(articleId:  "\(articleId)",success: {
+            (JSONResponse) -> Void in
+            
+            if (self.article?.isLiked)! {
+            self.likedBtn.setTitle("Liked", for: .normal)
+                
+            }else{
+                
+                 self.likedBtn.setTitle("not liked", for: .normal)
+            }
+             print(self.article?.id as Any)
+        }) {
+            (error) -> Void in
+            print(error)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

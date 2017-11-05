@@ -96,12 +96,19 @@ class TableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel?.text = self.articles[indexPath.item].title
+        
+        
+        let cell:ArticleCell = self.tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ArticleCell
+        
+        cell.Title?.text = self.articles[indexPath.item].title
         let url = URL(string: (self.articles[indexPath.item].image)!)
         let data = try? Data(contentsOf: url!)
-        cell.imageView?.image = UIImage(data: data!)
+        cell.thumbnail.image = UIImage(data: data!)
+        //cell.likeBtn(Any)
+    
+ 
         
         return cell
     }
