@@ -41,14 +41,20 @@ class RegisterViewController: UIViewController {
                     
                     let alertController = UIAlertController(title: "Success", message:
                         JSONResponse["Message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
                     
-                    self.present(alertController, animated: true, completion: nil)
                     
-                    //navigate to login
-                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginScreen") as! UITabBarController
-                    self.present(nextViewController, animated:true, completion:nil)
+                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+                        (result : UIAlertAction) -> Void in
+
+                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginScreen")
+                        self.present(nextViewController, animated:true, completion:nil)
+                    }
+                    
+                    
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated:true, completion:nil)
+     
                 
                 }else  {
                     
